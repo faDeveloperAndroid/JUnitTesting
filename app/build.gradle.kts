@@ -1,7 +1,14 @@
+import java.lang.System.getProperty
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+
+   // id("kotlin-android-extensions")
+    id("dagger.hilt.android.plugin")
+   // id("androidx.navigation.safeargs.kotlin")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -14,6 +21,8 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        buildConfigField("String", "API_KEY", "123A")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -36,6 +45,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -44,7 +54,7 @@ dependencies {
     annotationProcessor("android.arch.persistence.room:compiler:1.1.1")
     implementation("android.arch.persistence.room:rxjava2:1.1.1")
     implementation("android.arch.persistence.room:testing:1.1.1")
-
+    implementation("androidx.test:core:1.2.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -54,9 +64,7 @@ dependencies {
 
     val room_version = "2.6.1"
 
-    kapt("androidx.room:room-compiler:$room_version");
-
-
+    kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-runtime:$room_version")
 
     // optional - Kotlin Extensions and Coroutines support for Room
@@ -77,8 +85,6 @@ dependencies {
     // optional - Paging 3 Integration
     implementation("androidx.room:room-paging:$room_version")
 
-    implementation("androidx.test:core:1.2.0")
-
     // Local Unit Tests
     testImplementation("androidx.room:room-testing:$room_version")
     testImplementation("androidx.arch.core:core-testing:2.2.0")
@@ -89,7 +95,6 @@ dependencies {
     androidTestImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
     androidTestImplementation("com.google.truth:truth:1.0.1")
     androidTestImplementation("androidx.arch.core:core-testing:2.2.0")
 
@@ -135,6 +140,23 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation("org.mockito:mockito-core:2.25.0")
 
+// Retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+// Retrofit with Scalar Converter
+    implementation("com.squareup.retrofit2:converter-scalars:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-gson:2.1.0")
+
+    // DI with Hilt
+    implementation ("com.google.dagger:hilt-android:2.45")
+    kapt ("com.google.dagger:hilt-compiler:2.45")
+    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+    kapt ("androidx.hilt:hilt-compiler:1.1.0")
+
+    kaptAndroidTest ("com.google.dagger:hilt-android-compiler:2.38.1")
 
 }
 
+// Allow references to generated code
+kapt {
+    correctErrorTypes = true
+}
