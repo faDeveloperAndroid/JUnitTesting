@@ -9,7 +9,7 @@ import retrofit2.Response
 interface ProductRepository {
     suspend fun insertProductItem(product: Product)
     suspend fun deleteProductItem(product: Product)
-    suspend fun getAllProduct(): LiveData<List<Product>>
-    suspend fun totalPrice(): LiveData<Float>
+    fun getAllProduct(): LiveData<List<Product>>
+    fun totalPrice(): LiveData<Float>
     suspend fun searchForImage(imageQuery: String): Resource<ImageResponse>
 }

@@ -9,25 +9,4 @@ import androidx.room.RoomDatabase
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun ProductDao(): ProductDao
-
-    /*companion object{
-        @Volatile
-        private var INSTANCE: AppDatabase? = null
-
-        fun getDatabase(context: Context): AppDatabase {
-            //if INSTANCE is not null, return it
-            //else, create the database
-            return INSTANCE ?: synchronized(this){
-                val instance = Room.databaseBuilder(
-                    context,
-                    AppDatabase::class.java,
-                    "task_database")
-                    .createFromAsset("database/task_database")
-                    .build()
-                INSTANCE = instance
-
-                instance
-            }
-        }
-    }*/
 }

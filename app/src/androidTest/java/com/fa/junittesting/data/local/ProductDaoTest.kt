@@ -6,44 +6,56 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.fa.junittesting.getOrAwaitValue
+import com.google.ar.core.Config
 import com.google.common.truth.Truth.assertThat
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 
 @ExperimentalCoroutinesApi
-@RunWith(AndroidJUnit4::class)
 @SmallTest
+@HiltAndroidTest
 class ProductDaoTest {
 
-    private lateinit var appDatabase: AppDatabase
+    @Inject
+    @Named("test_db")
+    lateinit var appDatabas: AppDatabase
+
     private lateinit var productDao: ProductDao
+
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
 
     @get:Rule
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
-        appDatabase = Room.inMemoryDatabaseBuilder(
+        hiltRule.inject()
+        /*appDatabas = Room.inMemoryDatabaseBuilder(
             ApplicationProvider.getApplicationContext(),
             AppDatabase::class.java
-        ).allowMainThreadQueries().build()
-
-        productDao = appDatabase.ProductDao()
+        ).build()*/
+        productDao = appDatabas.ProductDao()
     }
 
     @After
     fun tearDown() {
-        appDatabase.close()
+        appDatabas.close()
     }
 
     @Test
-    fun insertProductTest() = runTest {
+    fun insertProductTest() = runBlockingTest {
         var newProduct = Product(1, "apple", 20, 2f, "")
         productDao.insertProduct(newProduct)
 
@@ -53,7 +65,7 @@ class ProductDaoTest {
     }
 
     @Test
-    fun deleteProductTest() = runTest {
+    fun deleteProductTest() = runBlockingTest {
         var newProduct = Product(1, "banana", 10, 1.5f, "")
         productDao.insertProduct(newProduct)
         productDao.deleteProduct(newProduct)
@@ -64,7 +76,7 @@ class ProductDaoTest {
     }
 
     @Test
-    fun totalPriceTest() = runTest {
+    fun totalPriceTest() = runBlockingTest {
         var newProduct1 = Product(1, "apple", 10, 1.5f, "")
         var newProduct2 = Product(2, "banana", 10, 2f, "")
         var newProduct3 = Product(3, "peach", 10, 3f, "")
@@ -73,7 +85,7 @@ class ProductDaoTest {
         productDao.insertProduct(newProduct3)
 
         val actualTotalPrice = productDao.totalPrice().getOrAwaitValue()
-        val totalPrice = 10 * 1.5 + 10 * 2 + 10 * 3
+        val totalPrice = 10 * 1.5f + 10 * 2f + 10 * 3f
         assertThat(actualTotalPrice).isEqualTo(totalPrice)
     }
 

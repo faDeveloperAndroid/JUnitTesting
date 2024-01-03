@@ -36,11 +36,11 @@ class FakeProductRepository : ProductRepository {
         refreshLiveData()
     }
 
-    override suspend fun getAllProduct(): LiveData<List<Product>> {
+    override fun getAllProduct(): LiveData<List<Product>> {
         return getAllProduct
     }
 
-    override suspend fun totalPrice(): LiveData<Float> {
+    override fun totalPrice(): LiveData<Float> {
         return totalPrice
     }
 

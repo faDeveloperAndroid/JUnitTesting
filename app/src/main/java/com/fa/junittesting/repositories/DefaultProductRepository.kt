@@ -20,11 +20,11 @@ class DefaultProductRepository @Inject constructor(
         productDao.deleteProduct(product)
     }
 
-    override suspend fun getAllProduct(): LiveData<List<Product>> {
+    override fun getAllProduct(): LiveData<List<Product>> {
         return productDao.getAllProducts()
     }
 
-    override suspend fun totalPrice(): LiveData<Float> {
+    override fun totalPrice(): LiveData<Float> {
         return productDao.totalPrice()
     }
 
