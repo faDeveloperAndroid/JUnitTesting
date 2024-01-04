@@ -145,6 +145,7 @@ dependencies {
     androidTestImplementation("org.mockito:mockito-core:2.28.2")
     androidTestImplementation("com.google.dagger:hilt-android-testing:2.48")
     kaptAndroidTest ("com.google.dagger:hilt-compiler:2.48")
+    debugImplementation("androidx.fragment:fragment-testing:1.6.2")
 
 
 // Retrofit

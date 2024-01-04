@@ -6,6 +6,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.fa.junittesting.getOrAwaitValue
+import com.fa.junittesting.launchFragmentInHiltContainer
+import com.fa.junittesting.ui.ProductFragment
 import com.google.ar.core.Config
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -42,16 +44,19 @@ class ProductDaoTest {
     @Before
     fun setUp() {
         hiltRule.inject()
-        /*appDatabas = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            AppDatabase::class.java
-        ).build()*/
         productDao = appDatabas.ProductDao()
     }
 
     @After
     fun tearDown() {
         appDatabas.close()
+    }
+
+    @Test
+    fun testLaunchFragmentInHiltContainer(){
+        launchFragmentInHiltContainer<ProductFragment> {
+
+        }
     }
 
     @Test
