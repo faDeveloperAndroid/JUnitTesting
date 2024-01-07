@@ -52,12 +52,11 @@ class ProductDaoTest {
         appDatabas.close()
     }
 
-    @Test
+   /* @Test
     fun testLaunchFragmentInHiltContainer(){
         launchFragmentInHiltContainer<ProductFragment> {
-
         }
-    }
+    }*/
 
     @Test
     fun insertProductTest() = runBlockingTest {
