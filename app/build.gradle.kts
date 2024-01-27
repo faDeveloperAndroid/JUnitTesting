@@ -1,5 +1,3 @@
-import java.lang.System.getProperty
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -7,7 +5,7 @@ plugins {
 
    // id("kotlin-android-extensions")
     id("dagger.hilt.android.plugin")
-   // id("androidx.navigation.safeargs.kotlin")
+    id("androidx.navigation.safeargs.kotlin")
     id("com.google.dagger.hilt.android")
     id("kotlin-android")
 }
@@ -46,6 +44,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding=true
         buildConfig = true
     }
 }
@@ -56,6 +55,10 @@ dependencies {
     implementation("android.arch.persistence.room:rxjava2:1.1.1")
     implementation("android.arch.persistence.room:testing:1.1.1")
     implementation("androidx.test:core:1.5.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.6")
+    implementation("androidx.databinding:databinding-runtime:8.2.2")
+    implementation("androidx.test:runner:1.5.2")
     kapt ("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0")
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -106,8 +109,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
 
     // Coroutine Lifecycle Scopes
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
 
 
     // Glide

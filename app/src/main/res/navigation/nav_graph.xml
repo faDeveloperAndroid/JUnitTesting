@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/productFragment">
+
+    <fragment
+        android:id="@+id/productFragment"
+        android:name="com.fa.junittesting.ui.ProductFragment"
+        android:label="ProductFragment" >
+        <action
+            android:id="@+id/action_productFragment_to_addProductItemFragment"
+            app:destination="@id/addProductItemFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/imagePickFragment"
+        android:name="com.fa.junittesting.ui.ImagePickFragment"
+        android:label="ImagePickFragment" />
+    <fragment
+        android:id="@+id/addProductItemFragment"
+        android:name="com.fa.junittesting.ui.AddProductItemFragment"
+        android:label="AddProductItemFragment" >
+        <action
+            android:id="@+id/action_addProductItemFragment_to_imagePickFragment"
+            app:destination="@id/imagePickFragment" />
+    </fragment>
+</navigation>
